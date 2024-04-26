@@ -6,7 +6,7 @@ import json
 import sys
 from jinja2 import Environment, FileSystemLoader
 
-def compile_receipt(json_file):
+def compile_receipt(json_string):
     try:
         # Create a new temporary directory
         with tempfile.TemporaryDirectory() as tmp_dir:
@@ -16,7 +16,7 @@ def compile_receipt(json_file):
             environment = Environment(loader=FileSystemLoader("templates/"))
             template = environment.get_template("purchase_receipt.txt")
 
-            content = template.render(json.load(json_file))
+            content = template.render(json.loads(json_string))
 
             with open(temp_tex_file, mode="w", encoding="utf-8") as message:
                 message.write(content)
@@ -27,9 +27,3 @@ def compile_receipt(json_file):
         print(f"Error occurred while compiling LaTeX document: {e}")
     os.remove("receipt.aux")
     os.remove("receipt.log")
-
-if __name__ == "__main__":
-    # Compile LaTeX document to PDF
-    with open(sys.argv[1], 'r') as f:
-        
-        compile_receipt(f)

@@ -1,0 +1,22 @@
+{
+    "form_date": "4/25/2024",
+    "last_name": "Girard",
+    "first_name": "David",
+    "purchase_date": "4/25/2024",
+    "contact_email": "dwg5906@rit.edu",
+    "vendor_name": "Arista",
+    "purchased_items": ["Switch", "Switch 2", "Switch 3"],
+    "card_purchase": "X",
+    "cash_purchase": "",
+    "csec_card": "",
+    "gci_card": "",
+    "refund": "",
+    "yes_tax": "",
+    "no_tax": "X",
+    "denied_tax": "",
+    "refund_date": "",
+    "purchase_reason": "These three switches were purchased to assist ops in their job of hosting the stack.",
+    "attendance_list": "David, Jose, Sharad, Sohail, Connor, David, Jose, Sharad, Sohail, Connor, David, Jose, Sharad, So",
+    "image_placeholder_text": "Some day soon"
+}
+  
