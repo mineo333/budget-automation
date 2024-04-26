@@ -7,7 +7,6 @@ RUN mkdir -p /home/user/templates
 #COPY purchase receipt
 COPY purchase_receipt.txt /home/user/templates/
 COPY compile.py /home/user/
-COPY test_file.json /home/user
 COPY ritseclogo.png /home/user
 RUN chown -R user:user /home/user
 
