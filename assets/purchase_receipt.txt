@@ -1,0 +1,121 @@
+\documentclass[10pt]{article}
+\usepackage{geometry}
+\usepackage{tabularx}
+\usepackage{framed}
+\usepackage[scaled]{helvet}
+\usepackage{tikzpagenodes}
+\usepackage{xcolor}
+\usepackage{graphicx}
+\def\spacing{1.95cm}
+\def\spacingtw{1.95cm}
+\geometry{
+    a4paper,
+    total={170mm, 257mm},
+    left=20mm,
+    top=20mm
+}
+
+\renewcommand{\arraystretch}{1.5}
+\setlength{\arrayrulewidth}{0.25mm}
+
+\begin{document}
+    \begin{center}
+        \includegraphics[width=7cm]{assets/ritseclogo.png}
+        \hrule
+    \end{center}
+
+    \begin{table}[htbp]
+    \section*{Purchaser Information}
+    \begin{tabularx}{\textwidth}{|p{4.2cm}|X|X|}
+        \hline
+        \textbf{FORM DATE} & \textbf{LAST NAME} & \textbf{FIRST NAME} \\
+        \multicolumn{1}{|l|}{ {{ form_date }} } & \multicolumn{1}{l|}{ {{ last_name }} } & \multicolumn{1}{l|}{ {{ first_name }} } \\
+    \end{tabularx}
+    \begin{tabularx}{\textwidth}{|p{4.2cm}|X|}
+        \hline
+        \textbf{PURCHASE DATE} & \textbf{CONTACT EMAIL} \\
+        \multicolumn{1}{|l|}{ {{ purchase_date }} } & \multicolumn{1}{l|}{ {{ contact_email }} } \\
+        \hline
+    \end{tabularx}
+
+    \end{table}
+    \begin{table}[htbp]
+
+    \vspace{1em}
+    \section*{Vendor Information}
+    \begin{tabularx}{\textwidth}{|p{4.2cm}|X|}
+        \hline
+        \textbf{VENDOR NAME} & \textbf{PURCHASE LIST} \\
+        \multicolumn{1}{|l|}{\begin{tabular}[t]{@{}l@{}}{{ vendor_name }}\end{tabular}} & \multicolumn{1}{l|}{\begin{tabular}[t]{@{}X@{}}
+            {% for item in purchased_items %}
+                {{ item }} \\
+                {% if not loop.last %}
+                \hline
+                {% endif %}
+            {% endfor %}
+        \end{tabular}} \\
+    \end{tabularx}
+    \begin{tabularx}{\textwidth}{|p{4.2cm}|X|}
+        \hline
+        \textbf{PURCHASE METHOD} & {
+          \begin{tabular}{p{\spacing}|p{\spacing}|p{\spacing}|p{\spacing}|p{\spacing}}
+              \begin{center} \vspace{-0.3em} [\ \ \ {{ card_purchase }} \ \ ] \end{center} &
+              \begin{center} \vspace{-0.3em} [\ \ \ {{ cash_purchase }} \ \ ] \end{center} &
+              \begin{center} \vspace{-0.3em} [\ \ \ {{ csec_card }} \ \ ] \end{center} &
+              \begin{center} \vspace{-0.3em} [\ \ \ {{ gci_card }} \ \ ] \end{center} &
+              \begin{center} \vspace{-0.3em} [\ \ \ {{ refund }} \ \ ] \end{center} \\
+              \centering RITSEC Card &
+              \centering RITSEC Cash &
+              \centering CSEC Card &
+              \centering GCI Card &
+              \centering Refund \\
+          \end{tabular}
+        }
+    \end{tabularx}
+    \begin{tabularx}{\textwidth}{|p{4.2cm}|X|}
+        \hline
+        \textbf{TAX CHARGE} & {
+          \begin{tabular}{p{\spacingtw}|p{\spacingtw}|p{\spacingtw}|p{4.4cm}}
+              \begin{center} \vspace{-0.3em} [\ \ \ {{ yes_tax }} \ \ ] \end{center} &
+              \begin{center} \vspace{-0.3em} [\ \ \ {{ no_tax }} \ \ ] \end{center} &
+              \begin{center} \vspace{-0.3em} [\ \ \ {{ denied_tax }} \ \ ] \end{center} &
+              \begin{center} \vspace{-0.3em} {{ refund_date }} \end{center} \\
+              \centering Yes &
+              \centering No &
+              \centering Exemption Denied &
+              \centering \ Refund Date \\
+          \end{tabular}
+        }
+    \end{tabularx}
+    \begin{tabularx}{\textwidth}{|X|}
+        \hline
+        \textbf{PURCHASE REASON} \\
+        {
+            {{ purchase_reason }}
+        } \\
+        \hline
+    \end{tabularx}
+\end{table}
+\begin{table}[htbp]
+    \vspace{1em}
+    \section*{Registration Information}
+    \begin{tabularx}{\textwidth}{|X|}
+        \hline
+        \textbf{FULL ATTENDEE LIST} \\
+        {
+            {{ attendance_list }}
+        } \\
+        \hline
+    \end{tabularx}
+\end{table}
+
+% Receipt
+\newpage
+\begin{center}
+\textbf{\section*{Digital Receipt Scan}}
+\hrule
+\vspace{0.5em}
+\includegraphics[width=6cm]{ {{ image_path }}}
+
+\end{center}
+\end{document}

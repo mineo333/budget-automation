@@ -3,11 +3,15 @@ FROM python:3.11
 RUN /usr/sbin/useradd -u 1000 user
 
 RUN mkdir -p /home/user/templates
-
+RUN mkdir -p /home/user/reciepts
 #COPY purchase receipt
-COPY purchase_receipt.txt /home/user/templates/
-COPY compile_pdf.py /home/user/
-COPY ritseclogo.png /home/user
+COPY purchase_receipt.txt /home/user/assets/
+COPY ritseclogo.png /home/user/
+COPY requirements.txt /home/user
+
+COPY utils.py /home/user/
+COPY models.py /home/user/
+COPY constants.py /home/user/
 COPY app.py /home/user
 RUN chown -R user:user /home/user
 
@@ -18,13 +22,14 @@ RUN apt-get install texlive-latex-base texlive-latex-extra -y
 USER 1000
 
 #install dependencies
-RUN pip3 install pdflatex
 RUN pip3 install Jinja2
-RUN pip3 install flask
+RUN pip3 install fastapi
+RUN pip3 install pdflatex
+RUN pip3 install pydantic
+RUN pip3 install Requests
+RUN pip3 install uvicorn
 
 #chmod all files
-RUN chmod 755 /home/user/compile_pdf.py
-RUN chmod 755 /home/user/templates/purchase_receipt.txt
 RUN chmod 755 /home/user/app.py
 
 WORKDIR /home/user
