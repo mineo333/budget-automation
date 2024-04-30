@@ -4,6 +4,7 @@ RUN /usr/sbin/useradd -u 1000 user
 
 RUN mkdir -p /home/user/templates
 RUN mkdir -p /home/user/receipts
+RUN mkdir -p /home/user/constants
 #COPY purchase receipt
 COPY assets/purchase_receipt.txt /home/user/assets/
 COPY assets/ritseclogo.png /home/user/assets/
@@ -12,7 +13,7 @@ COPY requirements.txt /home/user/
 COPY utils.py /home/user/
 COPY models.py /home/user/
 
-#COPY constants.py /home/user/ 
+#COPY constants.py /home/user/constants/__init__.py
 COPY app.py /home/user/
 RUN chown -R user:user /home/user
 
@@ -36,4 +37,4 @@ RUN chmod 755 /home/user/app.py
 
 WORKDIR /home/user
 
-CMD python3 /home/user/app.py
+CMD python3 /home/user/app.py   
