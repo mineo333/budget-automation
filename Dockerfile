@@ -11,7 +11,7 @@ COPY requirements.txt /home/user
 
 COPY utils.py /home/user/
 COPY models.py /home/user/
-COPY constants.py /home/user/
+#COPY constants.py /home/user/ #UNCOMMENT FOR LOCAL
 COPY app.py /home/user
 RUN chown -R user:user /home/user
 
