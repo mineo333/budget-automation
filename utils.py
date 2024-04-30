@@ -93,6 +93,6 @@ def compile_receipt(reciept_data: Submission) -> str:
                 temp_tex_file,
             ]
         )
-        os.remove(f"receipts/{output_file}.log")
-        os.remove(f"receipts/{output_file}.aux")
+    #    os.remove(f"receipts/{output_file}.log")
+    #    os.remove(f"receipts/{output_file}.aux")
         return os.path.join(receipts_dir, output_file + ".pdf")
