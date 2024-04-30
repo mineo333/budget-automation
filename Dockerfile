@@ -3,10 +3,10 @@ FROM python:3.11
 RUN /usr/sbin/useradd -u 1000 user
 
 RUN mkdir -p /home/user/templates
-RUN mkdir -p /home/user/reciepts
+RUN mkdir -p /home/user/receipts
 #COPY purchase receipt
-COPY purchase_receipt.txt /home/user/assets/
-COPY ritseclogo.png /home/user/
+COPY assets/purchase_receipt.txt /home/user/assets/
+COPY assets/ritseclogo.png /home/user/assets/
 COPY requirements.txt /home/user
 
 COPY utils.py /home/user/

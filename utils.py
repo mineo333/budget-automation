@@ -7,7 +7,7 @@ import base64
 from jinja2 import Environment, FileSystemLoader
 from models import Submission
 import uuid
-from constants import RECIEPTS_DIR
+from constants import RECEIPTS_DIR
 from pdflatex import PDFLaTeX
 import requests
 
@@ -71,7 +71,7 @@ def compile_receipt(reciept_data: Submission) -> str:
         print(temp_tex_file)
         # Compile the modified LaTeX document to PDF using pdflatex
         # subprocess.run(["pdflatex", temp_tex_file])
-        reciepts_dir = os.path.join(RECIEPTS_DIR)
+        receipts_dir = os.path.join(RECEIPTS_DIR)
 
         # subprocess.run(["pdflatex", "-output-directory", reciepts_dir, temp_tex_file])
         """
@@ -87,12 +87,12 @@ def compile_receipt(reciept_data: Submission) -> str:
             [
                 "pdflatex",
                 "-output-directory",
-                reciepts_dir,
+                receipts_dir,
                 "-jobname",
                 output_file,
                 temp_tex_file,
             ]
         )
-        os.remove(f"reciepts/{output_file}.log")
-        os.remove(f"reciepts/{output_file}.aux")
-        return os.path.join(reciepts_dir, output_file + ".pdf")
+        os.remove(f"receipts/{output_file}.log")
+        os.remove(f"receipts/{output_file}.aux")
+        return os.path.join(receipts_dir, output_file + ".pdf")
