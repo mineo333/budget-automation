@@ -11,7 +11,8 @@ COPY requirements.txt /home/user
 
 COPY utils.py /home/user/
 COPY models.py /home/user/
-#COPY constants.py /home/user/ #UNCOMMENT FOR LOCAL
+
+#COPY constants.py /home/user/ 
 COPY app.py /home/user
 RUN chown -R user:user /home/user
 
@@ -34,4 +35,4 @@ RUN chmod 755 /home/user/app.py
 
 WORKDIR /home/user
 
-CMD /home/user/app.py
+CMD python3 /home/user/app.py
