@@ -115,7 +115,7 @@
 \textbf{\section*{Digital Receipt Scan}}
 \hrule
 \vspace{0.5em}
-\includegraphics[width=6cm]{ {{ image_path }}}
+\includegraphics[width=4.5cm]{ {{ image_path }}}
 
 \end{center}
 \end{document}
