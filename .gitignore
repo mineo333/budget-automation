@@ -2,3 +2,4 @@ __pycache__
 __MACOSX
 constants.py
 assets/client_secrets.json
+assets/service_account.json

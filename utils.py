@@ -11,6 +11,8 @@ from constants import RECEIPTS_DIR
 from pdflatex import PDFLaTeX
 import requests
 
+from pydrive2.auth import GoogleAuth
+from pydrive2.drive import GoogleDrive
 
 def send_email_via_mailgun(
     api_key: str,
@@ -44,11 +46,11 @@ def send_email_via_mailgun(
             print(f"Failed to send email: {response.status_code} - {response.text}")
 
 
-def compile_receipt(reciept_data: Submission) -> str:
+def compile_receipt(receipt_data: Submission) -> str:
     """Compile a LaTeX document to PDF using pdflatex.
 
     Args:
-        reciept_data (Submission): Submission details, will be used to populate
+        receipt_data (Submission): Submission details, will be used to populate
         our LaTeX template.
 
     Returns:
@@ -61,10 +63,21 @@ def compile_receipt(reciept_data: Submission) -> str:
         environment = Environment(loader=FileSystemLoader("assets/"))
         template = environment.get_template("purchase_receipt.txt")
         image_path = os.path.join(tmp_dir, uuid.uuid4().hex + ".png")
-        with open(image_path, "wb") as image_file:
-            image_file.write(base64.b64decode(reciept_data.image))
+        
+        gauth = GoogleAuth(settings= {
+            "client_config_backend": "service",
+            "service_config": {
+                "client_json_file_path": "secrets/service_account.json",
+            }
+        })
+        
+        gauth.ServiceAuth()
+        drive = GoogleDrive(gauth)
+        image_file = drive.CreateFile({'id': receipt_data.image_id})
+        
+        image_file.GetContentFile(image_path)
 
-        content = template.render(image_path=image_path, **reciept_data.model_dump())
+        content = template.render(image_path=image_path, **receipt_data.model_dump())
 
         with open(temp_tex_file, mode="w", encoding="utf-8") as message:
             message.write(content)

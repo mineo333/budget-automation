@@ -24,7 +24,7 @@ class Submission(BaseModel):
     refund_date: str
     purchase_reason: str
     attendance_list: str
-    image: str
+    image_id: str
 
 
 class ErrorType(StrEnum):
