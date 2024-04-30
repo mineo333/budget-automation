@@ -7,18 +7,19 @@ RUN mkdir -p /home/user/receipts
 #COPY purchase receipt
 COPY assets/purchase_receipt.txt /home/user/assets/
 COPY assets/ritseclogo.png /home/user/assets/
-COPY requirements.txt /home/user
+COPY requirements.txt /home/user/
 
 COPY utils.py /home/user/
 COPY models.py /home/user/
 
 #COPY constants.py /home/user/ 
-COPY app.py /home/user
+COPY app.py /home/user/
 RUN chown -R user:user /home/user
+
+RUN ls -la /home/user/
 
 RUN apt-get update -y
 RUN apt-get install texlive-latex-base texlive-latex-extra -y
-
 
 USER 1000
 
